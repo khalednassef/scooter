@@ -16,11 +16,11 @@ public class FleetService {
      * minimizing the loss of resources. After choosing the FM district (index),
      * the number of fleet engineers needed is calculated correspondingly.
      *
-     * @param scooters  a list of number of scooters per district.
-     * @param fmLimit   the amount of scooters a Fleet Manager can maintain.
-     * @param feLimit   the amount of scooters a Fleet Engineer can maintain.
-     * @return  the minimum number of fleet engineers needed to help the FM
-     *          maintain all scooters in all districts.
+     * @param scooters a list of number of scooters per district.
+     * @param fmLimit  the amount of scooters a Fleet Manager can maintain.
+     * @param feLimit  the amount of scooters a Fleet Engineer can maintain.
+     * @return the minimum number of fleet engineers needed to help the FM
+     * maintain all scooters in all districts.
      */
     public int getMinFleetEngineers(List<Integer> scooters,
                                     Integer fmLimit,
@@ -96,7 +96,7 @@ public class FleetService {
         int feCount = 0;
         for (int i = 0; i < scooters.size(); i++) {
             if (i == index) {
-                int remaining = scooters.get(i) % fmLimit;
+                int remaining = scooters.get(i) > fmLimit ? scooters.get(i) - fmLimit : 0;
                 feCount += Math.ceil((double) remaining / (double) feLimit);
             } else {
                 feCount += Math.ceil((double) scooters.get(i) / (double) feLimit);
